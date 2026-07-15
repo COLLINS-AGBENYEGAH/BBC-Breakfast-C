@@ -1,0 +1,10 @@
+{
+  "name": "bbc-breakfast-forum-nomination",
+  "version": "1.0.0",
+  "description": "Church nomination form and admin export for BBC Breakfast Forum 2.0",
+  "private": true,
+  "dependencies": {
+    "@libsql/client": "^0.14.0",
+    "nodemailer": "^6.9.14"
+  }
+}

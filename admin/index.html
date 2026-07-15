@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BBC Breakfast Forum 2.0 — Admin</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root{
+    --navy: #0b1e3d;
+    --navy-2: #142a52;
+    --gold: #c9a227;
+    --gold-light: #e6c866;
+    --cream: #f7f5ef;
+    --ink: #1c2333;
+    --muted: #5a6274;
+    --line: #dfd9c7;
+    --danger: #a3342a;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family: Georgia, 'Times New Roman', serif;
+    background: var(--cream);
+    color: var(--ink);
+  }
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px 60px;}
+  .band{
+    background: linear-gradient(180deg,var(--navy) 0%, var(--navy-2) 100%);
+    color:#f4ead0;
+    padding:28px 20px 22px;
+    text-align:center;
+    border-bottom:4px solid var(--gold);
+  }
+  .band .eyebrow{
+    letter-spacing:.18em;
+    font-size:12px;
+    text-transform:uppercase;
+    color: var(--gold-light);
+    font-family: Arial, sans-serif;
+    margin-bottom:8px;
+  }
+  .band h1{
+    margin:0;
+    font-size:22px;
+    font-weight:normal;
+  }
+  .panel{
+    background:#fff;
+    border:1px solid var(--navy);
+    padding:28px 26px;
+    margin-top:22px;
+  }
+  .field{margin-bottom:14px;}
+  label{
+    display:block;
+    font-family:Arial, sans-serif;
+    font-size:12.5px;
+    color:var(--muted);
+    margin-bottom:5px;
+    letter-spacing:.02em;
+  }
+  input[type=text]{
+    width:100%;
+    padding:9px 10px;
+    border:1px solid var(--line);
+    border-radius:2px;
+    font-family:Arial, sans-serif;
+    font-size:14px;
+    background:#fff;
+    color:var(--ink);
+  }
+  input:focus{outline:1px solid var(--gold);border-color:var(--gold);}
+  button.primary{
+    font-family:Arial, sans-serif;
+    background:var(--navy);
+    color:#f4ead0;
+    border:1px solid var(--navy);
+    padding:12px 28px;
+    font-size:14px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    cursor:pointer;
+  }
+  button.primary:hover{background:var(--navy-2);}
+  button.secondary{
+    font-family:Arial, sans-serif;
+    background:transparent;
+    color:var(--navy);
+    border:1px solid var(--navy);
+    padding:12px 20px;
+    font-size:13px;
+    cursor:pointer;
+  }
+  button.secondary:hover{background:var(--cream);}
+  .msg{
+    font-family:Arial, sans-serif;
+    font-size:13.5px;
+    padding:12px 14px;
+    margin-bottom:18px;
+    border-left:3px solid var(--gold);
+    background:var(--cream);
+    color:var(--ink);
+    display:none;
+  }
+  .msg.show{display:block;}
+  .msg.error{border-color:var(--danger);color:var(--danger);}
+  .admin-gate{max-width:360px;margin:0 auto;text-align:center;}
+  .admin-gate p{font-family:Arial, sans-serif;color:var(--muted);font-size:13.5px;}
+  .admin-toolbar{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:18px;flex-wrap:wrap;gap:10px;
+    font-family:Arial, sans-serif;
+  }
+  .admin-toolbar .count{font-size:13.5px;color:var(--muted);}
+  .sub-card{
+    border:1px solid var(--line);
+    margin-bottom:14px;
+    background:#fff;
+  }
+  .sub-card .sub-head{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:12px 14px;
+    background:var(--cream);
+    cursor:pointer;
+    font-family:Arial, sans-serif;
+  }
+  .sub-head .church-name{font-weight:bold;color:var(--navy);font-size:14px;}
+  .sub-head .meta{font-size:12px;color:var(--muted);}
+  .sub-body{padding:14px;display:none;font-family:Arial, sans-serif;font-size:13px;}
+  .sub-body.open{display:block;}
+  .sub-body table{width:100%;border-collapse:collapse;margin-top:10px;}
+  .sub-body th,.sub-body td{border:1px solid var(--line);padding:6px 8px;font-size:12.5px;text-align:left;}
+  .sub-body th{background:var(--navy);color:#f4ead0;font-weight:normal;}
+  .kv{display:grid;grid-template-columns:150px 1fr;gap:4px 10px;margin-bottom:4px;}
+  .kv b{color:var(--muted);font-weight:normal;}
+  .empty{
+    text-align:center;color:var(--muted);
+    font-family:Arial, sans-serif;padding:40px 10px;
+  }
+</style>
+</head>
+<body>
+
+<div class="band">
+  <div class="eyebrow">Theological Education and Missions Centre</div>
+  <h1>BBC Breakfast Forum 2.0 — Admin</h1>
+</div>
+
+<div class="wrap">
+
+  <div class="panel">
+
+    <div id="admin-gate" class="admin-gate">
+      <h3 style="font-family:Arial, sans-serif;color:var(--navy);">Admin access</h3>
+      <p>Enter the admin passcode to view and export submitted nominations.</p>
+      <div class="field" style="text-align:left;max-width:260px;margin:0 auto 12px;">
+        <input type="text" id="adminPasscode" placeholder="Passcode">
+      </div>
+      <button class="primary" id="adminUnlockBtn">Unlock</button>
+      <div id="admin-gate-msg" class="msg" style="text-align:left;margin-top:14px;"></div>
+    </div>
+
+    <div id="admin-content" style="display:none;">
+      <div class="admin-toolbar">
+        <div class="count" id="submissionCount">0 submissions</div>
+        <div style="display:flex;gap:10px;">
+          <button class="secondary" id="refreshBtn">Refresh</button>
+          <button class="primary" id="exportBtn">Export CSV</button>
+        </div>
+      </div>
+      <div id="submissionsList"></div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+let adminPasscode = '';
+let unlocked = false;
+let cachedSubmissions = [];
+
+function showMsg(el, text, isError) {
+  el.textContent = text;
+  el.classList.add('show');
+  el.classList.toggle('error', !!isError);
+}
+function hideMsg(el) {
+  el.classList.remove('show');
+}
+
+const adminGate = document.getElementById('admin-gate');
+const adminGateMsg = document.getElementById('admin-gate-msg');
+const adminContent = document.getElementById('admin-content');
+
+document.getElementById('adminUnlockBtn').addEventListener('click', async () => {
+  hideMsg(adminGateMsg);
+  const val = document.getElementById('adminPasscode').value.trim();
+  if (!val) {
+    showMsg(adminGateMsg, 'Enter a passcode.', true);
+    return;
+  }
+  adminPasscode = val;
+  const ok = await loadSubmissions();
+  if (ok) {
+    unlocked = true;
+    adminGate.style.display = 'none';
+    adminContent.style.display = '';
+  } else {
+    showMsg(adminGateMsg, 'Incorrect passcode.', true);
+  }
+});
+
+document.getElementById('refreshBtn').addEventListener('click', loadSubmissions);
+document.getElementById('exportBtn').addEventListener('click', exportCsv);
+
+async function loadSubmissions() {
+  if (unlocked) {
+    document.getElementById('submissionsList').innerHTML = '<div class="empty">Loading submissions...</div>';
+  }
+  try {
+    const response = await fetch('/api/submissions?passcode=' + encodeURIComponent(adminPasscode));
+    if (response.status === 401) return false;
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || 'load failed');
+    const subs = data.submissions || [];
+    cachedSubmissions = subs;
+    renderSubmissions(subs);
+    return true;
+  } catch (err) {
+    if (unlocked) document.getElementById('submissionsList').innerHTML = '<div class="empty">Could not load submissions.</div>';
+    console.error(err);
+    return false;
+  }
+}
+
+function renderSubmissions(subs) {
+  document.getElementById('submissionCount').textContent =
+    subs.length + (subs.length === 1 ? ' submission' : ' submissions');
+  const listEl = document.getElementById('submissionsList');
+  if (subs.length === 0) {
+    listEl.innerHTML = '<div class="empty">No nominations submitted yet.</div>';
+    return;
+  }
+  listEl.innerHTML = '';
+  subs.forEach((sub, idx) => {
+    const card = document.createElement('div');
+    card.className = 'sub-card';
+    const date = new Date(sub.submittedAt);
+    const dateStr = isNaN(date) ? '' : date.toLocaleString();
+    card.innerHTML = `
+      <div class="sub-head" data-idx="${idx}">
+        <div>
+          <div class="church-name">${escapeHtml(sub.churchName || '(no church name)')}</div>
+          <div class="meta">${sub.nominees.length} nominee(s) &middot; submitted ${dateStr}</div>
+        </div>
+        <div class="meta">▾</div>
+      </div>
+      <div class="sub-body" id="sub-body-${idx}">
+        <div class="kv"><b>Head of church</b><span>${escapeHtml(sub.headOfChurch)}</span></div>
+        <div class="kv"><b>Contact person</b><span>${escapeHtml(sub.contactPerson)}</span></div>
+        <div class="kv"><b>Phone</b><span>${escapeHtml(sub.contactPhone)}</span></div>
+        <div class="kv"><b>Email</b><span>${escapeHtml(sub.contactEmail)}</span></div>
+        <div class="kv"><b>Authorising leader</b><span>${escapeHtml(sub.authName)} — ${escapeHtml(sub.authTitle)}</span></div>
+        <div class="kv"><b>Date signed</b><span>${escapeHtml(sub.authDate)}</span></div>
+        <table>
+          <thead><tr><th>No.</th><th>Full name</th><th>Title</th><th>Responsibility</th><th>Phone</th></tr></thead>
+          <tbody>
+            ${sub.nominees.map(n => `<tr>
+              <td>${n.no}</td>
+              <td>${escapeHtml(n.fullName)}</td>
+              <td>${escapeHtml(n.title)}</td>
+              <td>${escapeHtml(n.responsibility)}</td>
+              <td>${escapeHtml(n.phone)}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    `;
+    listEl.appendChild(card);
+  });
+
+  listEl.querySelectorAll('.sub-head').forEach(head => {
+    head.addEventListener('click', () => {
+      const idx = head.getAttribute('data-idx');
+      document.getElementById('sub-body-' + idx).classList.toggle('open');
+    });
+  });
+}
+
+function escapeHtml(str) {
+  if (str === undefined || str === null) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function exportCsv() {
+  if (cachedSubmissions.length === 0) {
+    alert('No submissions to export yet.');
+    return;
+  }
+  window.location.href = '/api/export?passcode=' + encodeURIComponent(adminPasscode);
+}
+</script>
+
+</body>
+</html>

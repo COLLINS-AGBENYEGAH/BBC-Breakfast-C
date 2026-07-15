@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BBC Breakfast Forum 2.0 — Church Nomination Form</title>
+<style>
+  :root{
+    --navy: #0b1e3d;
+    --navy-2: #142a52;
+    --gold: #c9a227;
+    --gold-light: #e6c866;
+    --cream: #f7f5ef;
+    --ink: #1c2333;
+    --muted: #5a6274;
+    --line: #dfd9c7;
+    --danger: #a3342a;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family: Georgia, 'Times New Roman', serif;
+    background: var(--cream);
+    color: var(--ink);
+  }
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px 60px;}
+  .band{
+    background: linear-gradient(180deg,var(--navy) 0%, var(--navy-2) 100%);
+    color:#f4ead0;
+    padding:36px 20px 30px;
+    text-align:center;
+    border-bottom:4px solid var(--gold);
+  }
+  .band .eyebrow{
+    letter-spacing:.18em;
+    font-size:12px;
+    text-transform:uppercase;
+    color: var(--gold-light);
+    font-family: Arial, sans-serif;
+    margin-bottom:10px;
+  }
+  .band h1{
+    margin:0 0 6px;
+    font-size:26px;
+    font-weight:normal;
+  }
+  .band h2{
+    margin:0 0 16px;
+    font-size:16px;
+    font-weight:normal;
+    color:#cdd6e6;
+    font-family: Arial, sans-serif;
+  }
+  .theme-box{
+    display:inline-block;
+    border:1px solid var(--gold);
+    padding:10px 18px;
+    font-family: Arial, sans-serif;
+    font-size:14px;
+    color:#f4ead0;
+    max-width:640px;
+  }
+  .theme-box b{color:var(--gold-light);}
+  .panel{
+    background:#fff;
+    border:1px solid var(--navy);
+    padding:28px 26px;
+    margin-top:22px;
+  }
+  section.block{margin-bottom:26px;}
+  .block h3{
+    font-family:Arial, sans-serif;
+    font-size:13px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--navy);
+    border-bottom:2px solid var(--gold);
+    padding-bottom:6px;
+    margin:0 0 16px;
+  }
+  .details-list{
+    font-family:Arial, sans-serif;
+    font-size:13.5px;
+    color:var(--muted);
+    line-height:1.8;
+    background:var(--cream);
+    border-left:3px solid var(--gold);
+    padding:14px 18px;
+    margin-bottom:26px;
+  }
+  .details-list b{color:var(--ink);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .field{margin-bottom:14px;}
+  label{
+    display:block;
+    font-family:Arial, sans-serif;
+    font-size:12.5px;
+    color:var(--muted);
+    margin-bottom:5px;
+    letter-spacing:.02em;
+  }
+  input[type=text], input[type=email], input[type=tel], input[type=date]{
+    width:100%;
+    padding:9px 10px;
+    border:1px solid var(--line);
+    border-radius:2px;
+    font-family:Arial, sans-serif;
+    font-size:14px;
+    background:#fff;
+    color:var(--ink);
+  }
+  input:focus{outline:1px solid var(--gold);border-color:var(--gold);}
+  table.clergy{width:100%;border-collapse:collapse;font-family:Arial, sans-serif;font-size:13px;}
+  table.clergy th{
+    background:var(--navy);color:#f4ead0;
+    padding:8px 6px;font-weight:normal;font-size:12px;text-transform:uppercase;letter-spacing:.03em;
+    text-align:left;
+  }
+  table.clergy td{border:1px solid var(--line);padding:4px;vertical-align:top;}
+  table.clergy td.no{
+    text-align:center;color:var(--muted);width:28px;background:var(--cream);
+  }
+  table.clergy input{border:none;padding:7px 6px;font-size:13px;}
+  table.clergy input:focus{outline:1px solid var(--gold);}
+  .table-scroll{overflow-x:auto;}
+  .confirm-text{
+    font-family:Arial, sans-serif;
+    font-size:13.5px;
+    color:var(--muted);
+    line-height:1.7;
+    margin-bottom:18px;
+  }
+  .actions{display:flex;justify-content:flex-end;gap:12px;margin-top:10px;}
+  button.primary{
+    font-family:Arial, sans-serif;
+    background:var(--navy);
+    color:#f4ead0;
+    border:1px solid var(--navy);
+    padding:12px 28px;
+    font-size:14px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    cursor:pointer;
+  }
+  button.primary:hover{background:var(--navy-2);}
+  .msg{
+    font-family:Arial, sans-serif;
+    font-size:13.5px;
+    padding:12px 14px;
+    margin-bottom:18px;
+    border-left:3px solid var(--gold);
+    background:var(--cream);
+    color:var(--ink);
+    display:none;
+  }
+  .msg.show{display:block;}
+  .msg.error{border-color:var(--danger);color:var(--danger);}
+  .required{color:var(--danger);}
+  @media (max-width:640px){
+    .grid2{grid-template-columns:1fr;}
+    .band h1{font-size:20px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="band">
+  <div class="eyebrow">Theological Education and Missions Centre — University of Gold Coast</div>
+  <h1>BBC Breakfast Forum 2.0</h1>
+  <h2>Church nomination form for senior clergy</h2>
+  <div class="theme-box">
+    Theme: <b>The Anti-LGBTQ+ Bill in Biblical Perspective</b>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="panel">
+
+    <div class="details-list">
+      <b>Date:</b> Wednesday, 19th August 2026 &nbsp;·&nbsp; <b>Time:</b> 8:30 a.m. – 12:45 p.m.<br>
+      <b>Venue:</b> Gold Coast Hall, University of Gold Coast, Spintex Road, Accra<br>
+      <b>Chairperson:</b> Apostle Professor Opoku Onyinah &nbsp;·&nbsp; <b>Keynote Speaker:</b> Professor Charles Ackah<br>
+      <b>Convener:</b> Bishop Dr. Gideon Titi-Ofei &nbsp;·&nbsp; <b>Host:</b> TEAM, University of Gold Coast, Ghana<br><br>
+      Churches are invited to nominate up to ten senior pastors or clergy to participate in this faith and thought leadership forum, which will equip participants with biblical, theological, legal and pastoral understanding.
+    </div>
+
+    <div id="form-msg" class="msg"></div>
+
+    <form id="nomination-form">
+
+      <section class="block">
+        <h3>A. Church details</h3>
+        <div class="grid2">
+          <div class="field">
+            <label>Name of church <span class="required">*</span></label>
+            <input type="text" id="churchName" required>
+          </div>
+          <div class="field">
+            <label>Name and title of head of church <span class="required">*</span></label>
+            <input type="text" id="headOfChurch" required>
+          </div>
+          <div class="field">
+            <label>Name of contact person <span class="required">*</span></label>
+            <input type="text" id="contactPerson" required>
+          </div>
+          <div class="field">
+            <label>Telephone number <span class="required">*</span></label>
+            <input type="tel" id="contactPhone" required>
+          </div>
+          <div class="field" style="grid-column:1/-1;">
+            <label>Email address <span class="required">*</span></label>
+            <input type="email" id="contactEmail" required>
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <h3>B. Nominated senior clergy</h3>
+        <p style="font-family:Arial, sans-serif;font-size:12.5px;color:var(--muted);margin:-6px 0 12px;">
+          List at least one nominee. Rows may be left blank if fewer than ten are nominated.
+        </p>
+        <div class="table-scroll">
+          <table class="clergy" id="clergyTable">
+            <thead>
+              <tr>
+                <th style="width:28px;">No.</th>
+                <th>Full name</th>
+                <th>Title / designation</th>
+                <th>Ministry responsibility</th>
+                <th>Telephone number</th>
+              </tr>
+            </thead>
+            <tbody id="clergyBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="block">
+        <h3>C. Church confirmation</h3>
+        <p class="confirm-text">
+          We confirm that the persons listed above have been officially nominated by our church to attend BBC Breakfast Forum 2.0. We understand that the forum is a Christian thought leadership gathering designed to strengthen biblical understanding, responsible Christian apologetics, pastoral readiness and congregational education.
+        </p>
+        <div class="grid2">
+          <div class="field">
+            <label>Name of authorising leader <span class="required">*</span></label>
+            <input type="text" id="authName" required>
+          </div>
+          <div class="field">
+            <label>Title / position <span class="required">*</span></label>
+            <input type="text" id="authTitle" required>
+          </div>
+          <div class="field">
+            <label>Date <span class="required">*</span></label>
+            <input type="date" id="authDate" required>
+          </div>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button type="submit" class="primary">Submit nomination</button>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+<script>
+const NUM_ROWS = 10;
+
+const clergyBody = document.getElementById('clergyBody');
+for (let i = 1; i <= NUM_ROWS; i++) {
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td class="no">${i}</td>
+    <td><input type="text" data-row="${i}" data-field="fullName"></td>
+    <td><input type="text" data-row="${i}" data-field="title"></td>
+    <td><input type="text" data-row="${i}" data-field="responsibility"></td>
+    <td><input type="text" data-row="${i}" data-field="phone"></td>
+  `;
+  clergyBody.appendChild(tr);
+}
+
+function showMsg(el, text, isError) {
+  el.textContent = text;
+  el.classList.add('show');
+  el.classList.toggle('error', !!isError);
+}
+function hideMsg(el) {
+  el.classList.remove('show');
+}
+
+const formMsg = document.getElementById('form-msg');
+
+document.getElementById('nomination-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  hideMsg(formMsg);
+
+  const nominees = [];
+  for (let i = 1; i <= NUM_ROWS; i++) {
+    const fullName = document.querySelector(`input[data-row="${i}"][data-field="fullName"]`).value.trim();
+    const title = document.querySelector(`input[data-row="${i}"][data-field="title"]`).value.trim();
+    const responsibility = document.querySelector(`input[data-row="${i}"][data-field="responsibility"]`).value.trim();
+    const phone = document.querySelector(`input[data-row="${i}"][data-field="phone"]`).value.trim();
+    if (fullName || title || responsibility || phone) {
+      nominees.push({ no: i, fullName, title, responsibility, phone });
+    }
+  }
+
+  if (nominees.length === 0) {
+    showMsg(formMsg, 'Add at least one nominated clergy member before submitting.', true);
+    return;
+  }
+
+  const submission = {
+    churchName: document.getElementById('churchName').value.trim(),
+    headOfChurch: document.getElementById('headOfChurch').value.trim(),
+    contactPerson: document.getElementById('contactPerson').value.trim(),
+    contactPhone: document.getElementById('contactPhone').value.trim(),
+    contactEmail: document.getElementById('contactEmail').value.trim(),
+    nominees: nominees,
+    authName: document.getElementById('authName').value.trim(),
+    authTitle: document.getElementById('authTitle').value.trim(),
+    authDate: document.getElementById('authDate').value
+  };
+
+  try {
+    const response = await fetch('/api/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(submission)
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || 'save failed');
+    showMsg(formMsg, 'Nomination submitted. Thank you — your church\'s nomination has been recorded.', false);
+    document.getElementById('nomination-form').reset();
+  } catch (err) {
+    showMsg(formMsg, 'Something went wrong while submitting. Please try again.', true);
+    console.error(err);
+  }
+});
+</script>
+
+</body>
+</html>
